@@ -1,49 +1,6 @@
 <?php
 
-
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
-
-// if (! function_exists('enhanced_info')) {
-//     /** * Write some information to the log. * 
-//      * * @param mixed $message 
-//      * * @param mixed $context 
-//      * */
-//     function enhanced_info($message, $context = []): void
-//     {
-//         [$message, $context] = array_map(function ($item) {
-//             return is_scalar($item) || is_null($item) ? $item : (array) $item;
-//         }, [$message, $context]);
-        
-//         // Log::info($message, is_array($context) ? $context : []);
-//         app('log')->info($message, $context);
-
-
-//         // // 🔵 Normalize message
-//         // if (!is_scalar($message) && $message !== null) {
-//         //     // JSON encode non-scalar messages
-//         //     $message = json_encode($message, JSON_PRETTY_PRINT);
-//         // } else {
-//         //     // Scalar => cast to string (strict mode compatible)
-//         //     $message = (string)$message;
-//         // }
-
-//         // // 🔵 Normalize context
-//         // if (is_array($context)) {
-//         //     // OK
-//         // } elseif (is_object($context)) {
-//         //     // Convert object -> array
-//         //     $context = (array)$context;
-//         // } elseif ($context === null) {
-//         //     $context = [];
-//         // } else {
-//         //     // Scalar → wrap as array
-//         //     $context = ['value' => $context];
-//         // }
-//         // Log::info($message, $context);
-//     }
-// }
-
 
 
 use Kks\LogEnhancer\Normalizer;

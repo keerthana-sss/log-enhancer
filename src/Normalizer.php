@@ -2,7 +2,6 @@
 
 namespace Kks\LogEnhancer;
 
-use WeakMap;
 use Traversable;
 use JsonSerializable;
 use Illuminate\Support\Collection;
@@ -47,16 +46,6 @@ class Normalizer
         // Traversable / iterators
         if ($item instanceof Traversable) {
             return self::normalize(iterator_to_array($item));
-        }
-
-        // WeakMap
-        if ($item instanceof WeakMap) {
-            $array = [];
-            foreach ($item as $key => $value) {
-                $array[$key] = self::normalize($value);
-            }
-
-            return $array;
         }
 
         // Fallback: turn public properties into array and normalize them
