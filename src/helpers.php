@@ -74,10 +74,8 @@ if (! function_exists('smart_info')) {
      */
     function smart_info($message, $context = []): void
     {
-        [$message, $context] = [
-            Normalizer::normalize($message),
-            Normalizer::normalize($context),
-        ];
+        $message = Normalizer::normalize($message);
+        $context = Normalizer::normalize($context);
 
         Log::info($message, is_array($context) ? $context : []);
     }

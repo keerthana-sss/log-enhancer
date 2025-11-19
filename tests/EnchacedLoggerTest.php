@@ -22,7 +22,7 @@ class EnchacedLoggerTest extends TestCase
     {
         Log::shouldReceive('info')
             ->once()
-            ->with(['foo' => 'bar']);
+            ->with(['foo' => 'bar'], []);
 
         smart_info(collect(['foo' => 'bar']));
     }
@@ -35,5 +35,47 @@ class EnchacedLoggerTest extends TestCase
             ->with('test', ['numbers' => [1, 2, 3]]);
 
         smart_info('test', ['numbers' => collect([1, 2, 3])]);
+    }
+
+    /** @test */
+    public function it_normalizes_nested_data(): void
+    {
+        $nestedData = [
+            'user' => collect([
+                'name' => 'John',
+                'address' => collect([
+                    'street' => '123 Main St',
+                    'city'   => 'Laravelville',
+                ]),
+            ]),
+            'orders' => collect([1, 2, 3]),
+        ];
+
+        $expected = [
+            'user' => [
+                'name' => 'John',
+                'address' => [
+                    'street' => '123 Main St',
+                    'city'   => 'Laravelville',
+                ],
+            ],
+            'orders' => [1, 2, 3],
+        ];
+
+        Log::shouldReceive('info')
+            ->once()
+            ->with($expected, []);
+
+        smart_info($nestedData);
+    }
+
+    /** @test */
+    public function it_handles_null_values_in_message_and_context(): void
+    {
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Test message', ['key' => null]);
+
+        smart_info('Test message', ['key' => null]);
     }
 }

@@ -2,11 +2,12 @@
 
 namespace Kks\LogEnhancer;
 
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
-use JsonSerializable;
-use Traversable;
 use WeakMap;
+use Traversable;
+use JsonSerializable;
+use Illuminate\Support\Collection;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Contracts\Support\Arrayable;
 
 class Normalizer
 {
@@ -25,13 +26,7 @@ class Normalizer
 
         // Arrays: recursively normalize each value
         if (is_array($item)) {
-            $normalized = [];
-
-            foreach ($item as $key => $value) {
-                $normalized[$key] = self::normalize($value);
-            }
-
-            return $normalized;
+            return array_map([self::class, 'normalize'], $item);
         }
 
         // Arrayable (Collections, Eloquent models with toArray etc.)

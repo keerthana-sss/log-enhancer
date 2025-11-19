@@ -1,5 +1,5 @@
 {
-    "name": "akhilduggirala/laravel-log-enhancer",
+    "name": "kks/log-enhancer",
     "description": "Enhanced logging helpers for Laravel (smart message/context normalization).",
     "type": "library",
     "license": "MIT",
